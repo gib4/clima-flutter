@@ -7,11 +7,16 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
+  @override
+  void initState() {
+    super.initState();
+    getLocation();
+  }
 
   void getLocation() async {
     bool serviceEnabled;
     LocationPermission permission;
-    Position position;
+    //Position position;
 
     // Test if location services are enabled.
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
@@ -41,20 +46,26 @@ class _LoadingScreenState extends State<LoadingScreen> {
           'Location permissions are permanently denied, we cannot request permissions.');
     }
 
-    position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    print(position);
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.low);
+      print(position);
+    } catch (e) {
+      print(e);
+    }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            getLocation();
-          },
-          child: Text('Get Location'),
-        ),
-      ),
-    );
+        //body: Center(
+        //  child: ElevatedButton(
+        //    onPressed: () {
+        //      getLocation();
+        //    },
+        //    child: Text('Get Location'),
+        //  ),
+        //),
+        );
   }
 }
