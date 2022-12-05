@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:test_app/services/location.dart';
+import 'package:sky_engine/_http/http.dart';
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -12,6 +14,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
     super.initState();
     getLocation();
   }
+
+  //void getData
 
   void getLocation() async {
     bool serviceEnabled;
@@ -46,13 +50,10 @@ class _LoadingScreenState extends State<LoadingScreen> {
           'Location permissions are permanently denied, we cannot request permissions.');
     }
 
-    try {
-      Position position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.low);
-      print(position);
-    } catch (e) {
-      print(e);
-    }
+    Location location = Location();
+    await location.getCurrentLocation();
+    print(location.latitude);
+    print(location.longitude);
   }
 
   @override
