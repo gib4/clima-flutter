@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import '/screens/loading_screen.dart';
+import 'package:clima/screens/loading_screen.dart';
 
 void main() => runApp(MyApp());
-
-// New line
 
 class MyApp extends StatelessWidget {
   @override

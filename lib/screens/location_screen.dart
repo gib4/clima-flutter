@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/utilities/constants.dart';
+import 'package:clima/utilities/constants.dart';
 
 class LocationScreen extends StatefulWidget {
   @override
@@ -28,14 +28,14 @@ class _LocationScreenState extends State<LocationScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  ElevatedButton(
+                  FlatButton(
                     onPressed: () {},
                     child: Icon(
                       Icons.near_me,
                       size: 50.0,
                     ),
                   ),
-                  ElevatedButton(
+                  FlatButton(
                     onPressed: () {},
                     child: Icon(
                       Icons.location_city,
@@ -74,3 +74,9 @@ class _LocationScreenState extends State<LocationScreen> {
     );
   }
 }
+
+
+// var weatherDescription  = decodedData['weather'][0]['description'];
+// var temperature         = decodedData['main']['temp'];
+// var condition           = decodedData['weather'][0]['id'];
+// var cityName            = decodedData['name'];
