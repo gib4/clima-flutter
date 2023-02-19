@@ -1,12 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:clima/utilities/constants.dart';
+import 'package:clima/services/weather.dart';
 
 class LocationScreen extends StatefulWidget {
+  LocationScreen({this.locationWeather});
+  final locationWeather;
+
   @override
   _LocationScreenState createState() => _LocationScreenState();
 }
 
 class _LocationScreenState extends State<LocationScreen> {
+  num temperature;
+  int condition;
+  String cityName;
+  WeatherModel weatherModel;
+
+  @override
+  void initState() {
+    super.initState();
+    updateUI(widget.locationWeather);
+    print(widget.locationWeather);
+  }
+
+  void updateUI(dynamic weatherData) {
+    //var weatherDescription = weatherData['weather'][0]['description'];
+    temperature = weatherData['main']['temp'];
+    condition = weatherData['weather'][0]['id'];
+    cityName = weatherData['name'];
+
+    print(temperature);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,11 +74,11 @@ class _LocationScreenState extends State<LocationScreen> {
                 child: Row(
                   children: <Widget>[
                     Text(
-                      '32°',
+                      '$temperature',
                       style: kTempTextStyle,
                     ),
                     Text(
-                      '☀️',
+                      //weatherModel.getWeatherIcon(condition),
                       style: kConditionTextStyle,
                     ),
                   ],
@@ -62,7 +87,7 @@ class _LocationScreenState extends State<LocationScreen> {
               Padding(
                 padding: EdgeInsets.only(right: 15.0),
                 child: Text(
-                  "It's 🍦 time in San Francisco!",
+                  "It's 🍦 time in $cityName !",
                   textAlign: TextAlign.right,
                   style: kMessageTextStyle,
                 ),
@@ -74,9 +99,3 @@ class _LocationScreenState extends State<LocationScreen> {
     );
   }
 }
-
-
-// var weatherDescription  = decodedData['weather'][0]['description'];
-// var temperature         = decodedData['main']['temp'];
-// var condition           = decodedData['weather'][0]['id'];
-// var cityName            = decodedData['name'];
